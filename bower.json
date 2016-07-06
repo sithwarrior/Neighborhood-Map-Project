@@ -1,0 +1,22 @@
+{
+  "name": "Neighborhood-Map-Project",
+  "homepage": "https://github.com/sithwarrior/Neighborhood-Map-Project",
+  "description": "udacity map project",
+  "main": "",
+  "moduleType": [
+    "globals"
+  ],
+  "license": "MIT",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "knockout": "~3.4.0",
+    "bootstrap": "v4.0.0-alpha.2"
+  }
+}
