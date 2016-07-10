@@ -8,7 +8,6 @@
     <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
     <meta name="description" content="Map Project for Udacity">
     <meta name="author" content="Martin Bech">
-    <!-- <link rel="icon" href="../../favicon.ico"> -->
 
     <title>Tesla Supercharger overview</title>
 
@@ -38,14 +37,14 @@
         <div class="col-md-6" id="listview">
           <form>
             <fieldset class="form-group">
-              <label for="exampleInputEmail1">Filter</label>
-              <input type="email" class="form-control" id="exampleInputEmail1"  data-bind="value: filter, valueUpdate: 'afterkeydown'">
+              <label for="chargerFilter">Filter</label>
+              <input type="email" class="form-control" id="chargerFilter"  data-bind="value: filter, valueUpdate: 'afterkeydown'">
             </fieldset>
           </form>
           <div class="list-group" data-bind="foreach: filteredSuperchargers">
             <a href="#" class="list-group-item" data-bind="click: $parent.select">
-              <h4 class="list-group-item-heading" data-bind="text: name">List group item heading</h4>
-              <p class="list-group-item-text" data-bind="text: adress"><img src="images/icon-supercharger.png"></p>
+              <h4 class="list-group-item-heading" data-bind="text: name"></h4>
+              <p class="list-group-item-text" data-bind="text: adress"></p>
             </a>
           </div>
         </div>
@@ -65,6 +64,6 @@
     <script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery.min.js"><\/script>')</script>
     <script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
     <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
-    <script src="../../assets/js/ie10-viewport-bug-workaround.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/js/ie10-viewport-bug-workaround.js"></script>
   </body>
 </html>
