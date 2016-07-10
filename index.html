@@ -10,7 +10,7 @@
     <meta name="author" content="Martin Bech">
     <!-- <link rel="icon" href="../../favicon.ico"> -->
 
-    <title>Starter Template for Bootstrap</title>
+    <title>Tesla Supercharger overview</title>
 
     <!-- Bootstrap core CSS -->
     <link href="bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -29,19 +29,17 @@
     <div class="container">
 
       <div class="starter-template">
-        <h1>Bootstrap starter template</h1>
-        <p class="lead">Use this document as a way to quickly start any new project.<br> All you get is this text and a mostly barebones HTML document.</p>
+        <h1>Tesla Superchargers</h1>
+        <p class="lead">A simple map of the superchargers in Denmark, with current weather.<br>Uses <a href="https://developers.google.com/maps/">Google Maps API</a> and <a href="http://openweathermap.org/api">openweathermap.</a></p>
       </div>
       <div class="row">
         <div class="col-md-6" id="map">
         </div>
         <div class="col-md-6" id="listview">
-          <!-- <h1>list</h1> -->
           <form>
             <fieldset class="form-group">
               <label for="exampleInputEmail1">Filter</label>
               <input type="email" class="form-control" id="exampleInputEmail1"  data-bind="value: filter, valueUpdate: 'afterkeydown'">
-              <!-- <small class="text-muted">Filter the superchargers.</small> -->
             </fieldset>
           </form>
           <div class="list-group" data-bind="foreach: filteredSuperchargers">
@@ -50,9 +48,6 @@
               <p class="list-group-item-text" data-bind="text: adress"><img src="images/icon-supercharger.png"></p>
             </a>
           </div>
-          <!-- <ul class="list-group" data-bind="foreach: superchargers">
-            <li class="list-group-item" data-bind="text: name"></li>
-          </ul> -->
         </div>
       </div>
 

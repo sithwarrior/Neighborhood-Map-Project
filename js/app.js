@@ -1,14 +1,17 @@
+//Set as global, so it can be referenced from everywhere
 var map;
-
-var markers = [];
 
 function initMap() {
   map = new google.maps.Map(document.getElementById('map'), {
+    //center on denmark
     center: {"lat" : 56.26392,
          "lng" : 9.501785},
-    zoom: 6
+    zoom: 6,
+    //project description mentions fullscreenControl
+    fullscreenControl: true
   });
 
+  //our Superchargers
   var chargers = [
     {name: 'Hjørring Supercharger', location : {"lat": 57.455824, "lng": 10.041378}, adress: 'Sprogøvej 1, 9800 Hjørring'},
     {name: 'København-Kastrup Supercharger', location : {"lat" : 55.614292, "lng" : 12.61353}, adress: 'Kirstinehøj 43, 2770 Kastrup'},
@@ -56,12 +59,14 @@ function initMap() {
     };
 
     self.filteredSuperchargers = ko.computed(function(){
+      //filter and comparision is set to lowercase, to avoid casesensitivity
       var filter = self.filter().toLowerCase();
       if (!filter) {
         for (var i = 0; i < self.superchargers().length; i++) {
-          //make sure all markers are displayed
+          //make sure all markers are displayed if no filter
           self.superchargers()[i].marker.setMap(map);
         }
+        //return complete list of superchargers if no filter
         return self.superchargers();
       }
       else {
@@ -80,6 +85,7 @@ function initMap() {
     })
   };
 
+  //bind viewmodel
   ko.applyBindings(new superchargersViewModel());
 
 };
@@ -87,24 +93,28 @@ function initMap() {
 function populateInfoWindow(marker, infowindow) {
   // Check to make sure the infowindow is not already opened on this marker.
   if (infowindow.marker != marker) {
-
+    //play bounce Animation, remove again with setTimeout.
     marker.setAnimation(google.maps.Animation.BOUNCE);
     setTimeout(function(){ marker.setAnimation(null); }, 750);
+    //set initial content of infowindow
     infowindow.setContent('<div>' + marker.title + '</div>');
 
+    //getting weather form openweathermap API async.
     jQuery.getJSON("http://api.openweathermap.org/data/2.5/weather?lat="+ marker.internalPosition.lat() + "&lon=" + marker.internalPosition.lng() +"&appid=f8197cd91bc3bd5126f7653a298ea25e", function(data) {
       console.log(data);
       var logoUrl = "http://openweathermap.org/img/w/"+ data.weather[0].icon +".png";
-
       infowindow.setContent(infowindow.getContent() + "<img src="+ logoUrl +">"+ data.weather[0].description +"");
+    }).fail(function( jqxhr, textStatus, error ) {
+      var err = textStatus + ", " + error;
+      infowindow.setContent(infowindow.getContent() + "<p>Problem getting weather data</p>");
+      console.log( "Request Failed: " + err );
     });
 
     infowindow.marker = marker;
-    infowindow.setContent('<div>' + marker.title + '</div>');
     infowindow.open(map, marker);
     // Make sure the marker property is cleared if the infowindow is closed.
     infowindow.addListener('closeclick',function(){
-      console.log(infowindow);
+      //Detach infowindow from marker
       infowindow.marker = null;
     });
   }
