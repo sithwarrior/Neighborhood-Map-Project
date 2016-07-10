@@ -41,7 +41,6 @@ function initMap() {
     });
 
     chargers[i].marker.addListener('click', function() {
-      this.setAnimation(google.maps.Animation.BOUNCE);
       populateInfoWindow(this, infowindow);
     });
   }
@@ -88,12 +87,25 @@ function initMap() {
 function populateInfoWindow(marker, infowindow) {
   // Check to make sure the infowindow is not already opened on this marker.
   if (infowindow.marker != marker) {
+
+    marker.setAnimation(google.maps.Animation.BOUNCE);
+    setTimeout(function(){ marker.setAnimation(null); }, 750);
+    infowindow.setContent('<div>' + marker.title + '</div>');
+
+    jQuery.getJSON("http://api.openweathermap.org/data/2.5/weather?lat="+ marker.internalPosition.lat() + "&lon=" + marker.internalPosition.lng() +"&appid=f8197cd91bc3bd5126f7653a298ea25e", function(data) {
+      console.log(data);
+      var logoUrl = "http://openweathermap.org/img/w/"+ data.weather[0].icon +".png";
+
+      infowindow.setContent(infowindow.getContent() + "<img src="+ logoUrl +">"+ data.weather[0].description +"");
+    });
+
     infowindow.marker = marker;
     infowindow.setContent('<div>' + marker.title + '</div>');
     infowindow.open(map, marker);
     // Make sure the marker property is cleared if the infowindow is closed.
     infowindow.addListener('closeclick',function(){
-      infowindow.setMarker(null);
+      console.log(infowindow);
+      infowindow.marker = null;
     });
   }
 }
