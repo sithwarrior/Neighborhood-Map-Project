@@ -10,3 +10,5 @@ API's Used:
 * openweathermap
 
 To get all dependencies run `bower install`
+
+Launch the app using **index.html**
