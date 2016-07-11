@@ -16,7 +16,7 @@
     <!-- <link href="../../dist/css/bootstrap.min.css" rel="stylesheet"> -->
 
     <!-- Custom styles for this template -->
-    <link href="starter-template.css" rel="stylesheet">
+    <link href="css/starter-template.css" rel="stylesheet">
   </head>
 
   <body>
@@ -52,6 +52,14 @@
 
     </div><!-- /.container -->
 
+    <script>
+    //Handles failure to load google maps api
+    function errorLoadingMaps() {
+      console.log("Error Loading Google Maps API");
+      $("#map").html("<p>Error Loading Google Maps</p>");
+      $("#listview").html("");
+    };
+    </script>
 
     <script src='bower_components/knockout/dist/knockout.js'></script>
     <!-- Bootstrap core JavaScript
@@ -59,11 +67,11 @@
     <!-- Placed at the end of the document so the pages load faster -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
     <script src="js/app.js"></script>
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB-dJjYpq9mrpFRhADIe7KfeA4Mw2i3tVg&callback=initMap"
-    async defer></script>
     <script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery.min.js"><\/script>')</script>
     <script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
     <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
     <script src="https://maxcdn.bootstrapcdn.com/js/ie10-viewport-bug-workaround.js"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB-dJjYpq9mrpFRhADIe7KfeA4Mw2i3tVg&callback=initMap"
+    async defer onerror="errorLoadingMaps()"></script>
   </body>
 </html>
