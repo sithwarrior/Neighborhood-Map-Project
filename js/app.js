@@ -24,7 +24,7 @@ function initMap() {
   ];
 
   //const used for the icon on markers
-  var image = "images/icon-supercharger.png";
+  var image = 'images/icon-supercharger.png';
 
   //Creating reuseable infowindow
   var infowindow = new google.maps.InfoWindow({
@@ -49,7 +49,7 @@ function initMap() {
 
   function superchargersViewModel() {
     var self = this;
-    self.filter = ko.observable("");
+    self.filter = ko.observable('');
 
     self.superchargers = ko.observableArray(chargers);
 
@@ -99,14 +99,14 @@ function populateInfoWindow(marker, infowindow) {
     infowindow.setContent('<div>' + marker.title + '</div>');
 
     //getting weather form openweathermap API async.
-    jQuery.getJSON("http://api.openweathermap.org/data/2.5/weather?lat="+ marker.internalPosition.lat() + "&lon=" + marker.internalPosition.lng() +"&appid=f8197cd91bc3bd5126f7653a298ea25e", function(data) {
+    jQuery.getJSON('http://api.openweathermap.org/data/2.5/weather?lat='+ marker.internalPosition.lat() + '&lon=' + marker.internalPosition.lng() +'&appid=f8197cd91bc3bd5126f7653a298ea25e', function(data) {
       console.log(data);
-      var logoUrl = "http://openweathermap.org/img/w/"+ data.weather[0].icon +".png";
-      infowindow.setContent(infowindow.getContent() + "<img src="+ logoUrl +">"+ data.weather[0].description +"");
+      var logoUrl = 'http://openweathermap.org/img/w/'+ data.weather[0].icon + '.png';
+      infowindow.setContent(infowindow.getContent() + '<img src='+ logoUrl +'>'+ data.weather[0].description);
     }).fail(function( jqxhr, textStatus, error ) {
       var err = textStatus + ", " + error;
-      infowindow.setContent(infowindow.getContent() + "<p>Problem getting weather data</p>");
-      console.log( "Request Failed: " + err );
+      infowindow.setContent(infowindow.getContent() + '<p>Problem getting weather data</p>');
+      console.log( 'Request Failed: ' + err );
     });
 
     infowindow.marker = marker;
