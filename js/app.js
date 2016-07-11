@@ -26,13 +26,12 @@ function initMap() {
   //const used for the icon on markers
   var image = "images/icon-supercharger.png";
 
+  //Creating reuseable infowindow
+  var infowindow = new google.maps.InfoWindow({
+  });
+
   //setting up a marker for each supercharger
   for (var i = 0; i < chargers.length; i++) {
-
-    var contentString = "<div><h3>"+ chargers[i].name +"</h3></div>"
-    var infowindow = new google.maps.InfoWindow({
-      content: contentString
-    });
 
     chargers[i].marker = new google.maps.Marker({
       position: chargers[i].location,
@@ -80,15 +79,15 @@ function initMap() {
             //hide place from map if not match for filter
             item.marker.setMap(null);
           }
-        })
+        });
       }
-    })
-  };
+    });
+  }
 
   //bind viewmodel
   ko.applyBindings(new superchargersViewModel());
 
-};
+}
 
 function populateInfoWindow(marker, infowindow) {
   // Check to make sure the infowindow is not already opened on this marker.
